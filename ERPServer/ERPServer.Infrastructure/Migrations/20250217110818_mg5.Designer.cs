@@ -4,6 +4,7 @@ using ERPServer.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERPServer.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250217110818_mg5")]
+    partial class mg5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,7 +89,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Customer", b =>
@@ -121,7 +124,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Depot", b =>
@@ -148,7 +151,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Depots", (string)null);
+                    b.ToTable("Depots");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Order", b =>
@@ -160,17 +163,15 @@ namespace ERPServer.Infrastructure.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateOnly>("DeliveryDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderNumberYear")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasColumnType("varchar(16)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -179,7 +180,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.OrderDetail", b =>
@@ -206,7 +207,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetails", (string)null);
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Product", b =>
@@ -224,7 +225,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Recipe", b =>
@@ -240,7 +241,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Recipes", (string)null);
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.RecipeDetail", b =>
@@ -264,7 +265,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeDetails", (string)null);
+                    b.ToTable("RecipeDetails");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -284,7 +285,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Order", b =>
@@ -301,7 +302,7 @@ namespace ERPServer.Infrastructure.Migrations
             modelBuilder.Entity("ERPServer.Domain.Entities.OrderDetail", b =>
                 {
                     b.HasOne("ERPServer.Domain.Entities.Order", null)
-                        .WithMany("Details")
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -345,7 +346,7 @@ namespace ERPServer.Infrastructure.Migrations
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Order", b =>
                 {
-                    b.Navigation("Details");
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Recipe", b =>
