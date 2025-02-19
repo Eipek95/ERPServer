@@ -1,5 +1,4 @@
-﻿
-using ERPServer.Application.Features.Products.CreateProduct;
+﻿using ERPServer.Application.Features.Products.CreateProduct;
 using ERPServer.Application.Features.Products.DeleteProductById;
 using ERPServer.Application.Features.Products.GetAllProduct;
 using ERPServer.Application.Features.Products.UpdateProduct;
