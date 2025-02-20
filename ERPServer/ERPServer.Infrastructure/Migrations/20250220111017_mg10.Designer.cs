@@ -4,6 +4,7 @@ using ERPServer.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERPServer.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250220111017_mg10")]
+    partial class mg10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -332,9 +335,6 @@ namespace ERPServer.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DepotId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("InvoiceId")
                         .HasColumnType("uniqueidentifier");
 
@@ -348,8 +348,6 @@ namespace ERPServer.Infrastructure.Migrations
                         .HasColumnType("decimal(7,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepotId");
 
                     b.HasIndex("InvoiceId");
 
@@ -466,12 +464,6 @@ namespace ERPServer.Infrastructure.Migrations
 
             modelBuilder.Entity("InvoiceDetail", b =>
                 {
-                    b.HasOne("ERPServer.Domain.Entities.Depot", "Depot")
-                        .WithMany()
-                        .HasForeignKey("DepotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Invoice", null)
                         .WithMany("Details")
                         .HasForeignKey("InvoiceId")
@@ -483,8 +475,6 @@ namespace ERPServer.Infrastructure.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Depot");
 
                     b.Navigation("Product");
                 });
