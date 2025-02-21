@@ -4,6 +4,7 @@ using ERPServer.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERPServer.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250221135327_mg14")]
+    partial class mg14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,7 +89,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Customer", b =>
@@ -121,7 +124,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Depot", b =>
@@ -148,7 +151,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Depots", (string)null);
+                    b.ToTable("Depots");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Order", b =>
@@ -179,7 +182,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.OrderDetail", b =>
@@ -206,7 +209,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetails", (string)null);
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Product", b =>
@@ -224,7 +227,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Production", b =>
@@ -251,7 +254,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Productions", (string)null);
+                    b.ToTable("Productions");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Recipe", b =>
@@ -267,7 +270,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Recipes", (string)null);
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.RecipeDetail", b =>
@@ -291,7 +294,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeDetails", (string)null);
+                    b.ToTable("RecipeDetails");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.StockMovement", b =>
@@ -329,7 +332,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("ProductionId");
 
-                    b.ToTable("StockMovements", (string)null);
+                    b.ToTable("StockMovements");
                 });
 
             modelBuilder.Entity("Invoice", b =>
@@ -355,7 +358,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Invoices", (string)null);
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("InvoiceDetail", b =>
@@ -387,7 +390,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("InvoiceDetails", (string)null);
+                    b.ToTable("InvoiceDetails");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -407,7 +410,7 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Order", b =>
